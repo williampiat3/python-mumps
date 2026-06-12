@@ -23,6 +23,14 @@ The recommended way to install `python-mumps` is using `mamba`/`conda`.
 mamba install -c conda-forge python-mumps
 ```
 
+`python-mumps` can be installed along with MUMPS by using spack
+```
+spack install py-python-mumps
+```
+Contrary to conda this allows to customize and build MUMPS and MPI along when building `python-mumps`.
+This ensures that the installation is tailored to your machine with maximum performance.
+However, this comes at the expense of a long, albeit automatic, installation.
+
 `python-mumps` can also be installed from PyPI, however this is a more involved procedure
 that requires separately installing the MUMPS library and a C compiler.
 
