@@ -91,7 +91,9 @@ cdef class {{p.lower()}}mumps:
     cdef mumps.{{p}}MUMPS_STRUC_C params
 
     cdef public mumps_int_array icntl
+    cdef public mumps_int_array keep
     cdef public {{p.lower()}}mumps_real_array cntl
+    cdef public {{p.lower()}}mumps_real_array dkeep
     cdef public mumps_int_array info
     cdef public mumps_int_array infog
     cdef public {{p.lower()}}mumps_real_array rinfo
@@ -114,7 +116,9 @@ cdef class {{p.lower()}}mumps:
             mumps.{{p.lower()}}mumps_c(&self.params)
 
         self.icntl = make_mumps_int_array(self.params.icntl)
+        self.keep = make_mumps_int_array(self.params.keep)
         self.cntl = make_{{p.lower()}}mumps_real_array(self.params.cntl)
+        self.dkeep = make_{{p.lower()}}mumps_real_array(self.params.dkeep)
         self.info = make_mumps_int_array(self.params.info)
         self.infog = make_mumps_int_array(self.params.infog)
         self.rinfo = make_{{p.lower()}}mumps_real_array(self.params.rinfo)
