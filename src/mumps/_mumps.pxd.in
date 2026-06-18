@@ -38,6 +38,9 @@ cdef extern from "{{p.lower()}}mumps_c.h" nogil:
         MUMPS_INT icntl[60]
         {{p}}MUMPS_REAL cntl[15]
 
+        MUMPS_INT keep[500]
+        {{p}}MUMPS_REAL dkeep[230]
+
         MUMPS_INT n
 
         MUMPS_INT nz
