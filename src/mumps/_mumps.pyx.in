@@ -219,5 +219,8 @@ cdef class {{p.lower()}}mumps:
 
         self.params.lredrhs = rhs.shape[0]
         self.params.redrhs = <mumps.{{p}}MUMPS_COMPLEX *>rhs.data
+        
+    def write_problem(name):
+        self.params.write_problem = name
 
 {{endfor}}
