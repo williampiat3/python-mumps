@@ -41,6 +41,8 @@ cdef extern from "{{p.lower()}}mumps_c.h" nogil:
         MUMPS_INT keep[500]
         {{p}}MUMPS_REAL dkeep[230]
 
+        char write_problem[1024]
+
         MUMPS_INT n
 
         MUMPS_INT nz
