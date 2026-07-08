@@ -223,6 +223,7 @@ cdef class {{p.lower()}}mumps:
     def write_problem(self, name):
         cdef bytes name_bytes
         cdef Py_ssize_t n
+        cdef Py_ssize_t i
 
         if isinstance(name, str):
             name_bytes = (<str>name).encode()
@@ -235,8 +236,8 @@ cdef class {{p.lower()}}mumps:
         if n >= 1024:
             raise ValueError("write_problem name is too long (max 1023 bytes)")
 
-        memset(self.params.write_problem, 0, 1024)
-        if n > 0:
-            memcpy(self.params.write_problem, <const char *>name_bytes, n)
-
+        for i in range(1024):
+            self.params.write_problem[i] = <char>0
+        for i in range(n):
+            self.params.write_problem[i] = <char>name_bytes[i]
 {{endfor}}
