@@ -221,6 +221,22 @@ cdef class {{p.lower()}}mumps:
         self.params.redrhs = <mumps.{{p}}MUMPS_COMPLEX *>rhs.data
         
     def write_problem(self, name):
-        self.params.write_problem = name
+        cdef bytes name_bytes
+        cdef Py_ssize_t n
+
+        if isinstance(name, str):
+            name_bytes = (<str>name).encode()
+        elif isinstance(name, (bytes, bytearray)):
+            name_bytes = bytes(name)
+        else:
+            raise TypeError("write_problem expects str, bytes, or bytearray")
+
+        n = len(name_bytes)
+        if n >= 1024:
+            raise ValueError("write_problem name is too long (max 1023 bytes)")
+
+        memset(self.params.write_problem, 0, 1024)
+        if n > 0:
+            memcpy(self.params.write_problem, <const char *>name_bytes, n)
 
 {{endfor}}
